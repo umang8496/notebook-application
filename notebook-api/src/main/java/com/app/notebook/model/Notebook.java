@@ -39,8 +39,10 @@ public class Notebook {
 
 	public Notebook(UUID notebookId, String notebookName) {
 		this();
-		if (notebookId != null) {
+		if (notebookId == null) {
 			this.notebookId = UUID.randomUUID();
+		} else {
+			this.notebookId = notebookId;
 		}
 		this.notebookName = notebookName;
 	}

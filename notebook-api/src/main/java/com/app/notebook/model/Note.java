@@ -21,7 +21,7 @@ public class Note {
 	@Column(name = "noteContent", nullable = false, length = 256)
 	private String noteContent;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Notebook notebook;
 
 	@Column(name = "lastModifiedOn")
@@ -40,11 +40,12 @@ public class Note {
 		this.noteContent = noteContent;
 	}
 
-	public Note(String noteId, String noteName, String noteContent, Notebook notebook) {
-		this(noteName, noteContent, notebook);
-		if (noteId != null) {
-			this.noteId = UUID.fromString(noteId);
-		}
+	public Note(UUID noteId, String noteName, String noteContent, Notebook notebook) {
+		this.noteId = noteId;
+		this.lastModifiedOn = new Date();
+		this.noteName = noteName;
+		this.notebook = notebook;
+		this.noteContent = noteContent;
 	}
 
 	public UUID getNoteId() {
