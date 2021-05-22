@@ -29,10 +29,16 @@ public class Mapper {
 		return viewModel;
 	}
 
-	public Note convertToNoteEntity(NoteViewModel viewModel) {
-		Notebook notebook = this.notebookRepository.findById(UUID.fromString(viewModel.getNotebookId())).get();
-		Note entity = new Note(UUID.fromString(viewModel.getId()), viewModel.getTitle(), viewModel.getText(), notebook);
-
+	public Note convertToNoteEntity(NoteViewModel noteViewModel) {
+		UUID noteId = null;
+		if (noteViewModel.getId() != null) {
+			noteId = UUID.fromString(noteViewModel.getId());
+		} else {
+			noteId = UUID. randomUUID();
+		}
+		
+		Notebook notebook = this.notebookRepository.findById(UUID.fromString(noteViewModel.getNotebookId())).get();
+		Note entity = new Note(noteId, noteViewModel.getTitle(), noteViewModel.getText(), notebook);
 		return entity;
 	}
 
@@ -45,8 +51,15 @@ public class Mapper {
 		return viewModel;
 	}
 
-	public Notebook convertToNotebookEntity(NotebookViewModel viewModel) {
-		Notebook entity = new Notebook(UUID.fromString(viewModel.getId()), viewModel.getName());
+	public Notebook convertToNotebookEntity(NotebookViewModel notebookViewModel) {
+		UUID notebookId = null;
+		if (notebookViewModel.getId() != null) {
+			notebookId = UUID.fromString(notebookViewModel.getId());
+		} else {
+			notebookId = UUID. randomUUID();
+		}
+		
+		Notebook entity = new Notebook(notebookId, notebookViewModel.getName());
 		return entity;
 	}
 }

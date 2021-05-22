@@ -1,6 +1,8 @@
 package com.app.notebook.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,13 @@ public class NotebookService {
 
 	public void saveNotebook(Notebook notebook) {
 		this.notebookRepository.save(notebook);
+	}
+	
+	public Optional<Notebook> findById(String notebookId) {
+		return notebookRepository.findById(UUID.fromString(notebookId));
+	}
+	
+	public void deleteById(String id) {
+		this.notebookRepository.deleteById(UUID.fromString(id));
 	}
 }

@@ -3,7 +3,6 @@ package com.app.notebook.viewmodel;
 import javax.validation.constraints.NotNull;
 
 public class NotebookViewModel {
-	@NotNull
 	private String id;
 
 	@NotNull
